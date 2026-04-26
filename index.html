@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DominoClub - Juego de Dominó Oficial</title>
     <link rel="icon" type="image/x-icon" href="pictures/logo.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #004877;
@@ -12,6 +13,7 @@
             --accent: #f39c12;
             --light: #ecf0f1;
             --dark: #001544;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
         * {
@@ -25,8 +27,10 @@
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         
+        /* --- Header --- */
         header {
             background: linear-gradient(135deg, var(--primary), var(--dark));
             color: white;
@@ -38,10 +42,9 @@
         }
         
         .container {
-            width: 90%;
+            width: 92%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
         }
         
         .header-content {
@@ -53,289 +56,200 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         
-        .logo h1 {
-            font-size: 1.8rem;
-        }
+        .logo h1 { font-size: 1.5rem; }
         
-        .logo-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.2);
         }
         
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 15px;
         }
         
         nav a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: 0.3s;
+            font-size: 0.9rem;
+            transition: var(--transition);
             padding: 8px 12px;
-            border-radius: 4px;
+            border-radius: 8px;
         }
         
-        nav a:hover {
-            background: rgba(255,255,255,0.1);
-        }
-        
+        nav a:hover { background: rgba(255,255,255,0.15); }
+
+        /* --- Hero --- */
         .hero {
-            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(26, 37, 48, 0.9)), 
-                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%232c3e50"/><circle cx="20" cy="20" r="5" fill="%23f39c12" opacity="0.6"/><circle cx="50" cy="50" r="7" fill="%23e74c3c" opacity="0.4"/><circle cx="80" cy="80" r="4" fill="%23ecf0f1" opacity="0.5"/></svg>');
-            background-size: cover;
+            background: linear-gradient(rgba(0, 21, 68, 0.8), rgba(0, 21, 68, 0.9)), 
+                        url('https://www.transparenttextures.com/patterns/cubes.png');
             color: white;
             padding: 80px 0;
             text-align: center;
         }
         
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
         .hero h2 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.1rem;
+            margin-bottom: 35px;
             opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .cta-button {
             display: inline-block;
             background: var(--secondary);
             color: white;
-            padding: 15px 35px;
+            padding: 14px 30px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.1rem;
-            transition: 0.3s;
+            transition: var(--transition);
             box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
-            border: 2px solid transparent;
-            margin: 10px; /* Esto añade espacio alrededor de cada botón */
-            display: inline-block;
+            margin: 8px;
         }
         
         .cta-button:hover {
-            background: transparent;
-            border-color: white;
             transform: translateY(-3px);
+            filter: brightness(1.1);
         }
-        
-        .features {
-            padding: 80px 0;
-            background: white;
-        }
+
+        /* --- Features --- */
+        .features { padding: 70px 0; background: white; }
         
         .section-title {
             text-align: center;
             margin-bottom: 50px;
-            color: var(--primary);
         }
         
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
+            color: var(--primary);
             position: relative;
-            display: inline-block;
             padding-bottom: 15px;
         }
-
-     
         
-.section-title h2:after {
+        .section-title h2:after {
             content: '';
             position: absolute;
-            
-            bottom: 0;
-            left: 50%;
+            bottom: 0; left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
+            width: 60px; height: 4px;
             background: var(--accent);
+            border-radius: 2px;
         }
-        
+
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
         
         .feature-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: 0.3s;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            text-align: center;
+            border-bottom: 3px solid transparent;
         }
         
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            border-bottom-color: var(--accent);
         }
         
         .feature-icon {
-            background: var(--primary);
-            color: white;
             font-size: 2.5rem;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .feature-content {
-            padding: 25px;
-        }
-        
-        .feature-content h3 {
             color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .screenshots {
-            padding: 80px 0;
-            background: #f0f4f8;
+            margin-bottom: 20px;
         }
 
-        
-        .screenshot-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 25px;
-            margin-top: 40px;
-        }
-        
-        .screenshot {
-            width: 220px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: 0.3s;
-            border: 5px solid white;
-        }
-        
-        .screenshot:hover {
-            transform: scale(1.05);
-        }
+        /* --- Carrusel Elegante --- */
+        .screenshots { padding: 70px 0; background: #f0f4f8; }
 
         .carousel-elegant {
-  position: relative;
-  max-width: 900px;
-  width: 90vw;
-  height: 56.25vw; /* 16:9 aspect ratio */
-  max-height: 500px;
-  margin: 44px auto 0 auto;
-  background: #fff;
-  border-radius: 22px;
-  box-shadow: 0 10px 32px 0 rgba(44,62,80,0.14);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
+            position: relative;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            overflow: hidden;
+        }
 
-.carousel-track {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
+        .carousel-track { width: 100%; height: 100%; position: relative; }
 
-.carousel-img {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 20px;
-  box-shadow: 0 4px 24px rgba(44,62,80,0.08);
-  opacity: 0;
-  z-index: 1;
-  transition: opacity 0.7s cubic-bezier(.85,0,.15,1), transform 0.3s;
-}
+        .carousel-img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: contain;
+            background: #fff;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            padding: 10px;
+        }
 
-.carousel-img.active {
-  opacity: 1;
-  z-index: 2;
-  transform: scale(1.015);
-}
+        .carousel-img.active { opacity: 1; z-index: 2; }
 
-.carousel-arrow {
-  background: rgba(44, 62, 80, 0.20);
-  color: #e74c3c;
-  border: 2px solid #2c3e50;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 1.7rem;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  cursor: pointer;
-  transition: background 0.17s, color 0.13s, border 0.16s;
-  opacity: 0.63;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.carousel-arrow.left { left: 18px; }
-.carousel-arrow.right { right: 18px; }
-.carousel-arrow:hover {
-  background: #e74c3c;
-  color: #fff;
-  opacity: 1;
-  border: 2px solid #e74c3c;
-}
+        .carousel-arrow {
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            color: var(--primary);
+            transition: var(--transition);
+        }
 
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 13px;
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 15;
-}
+        .carousel-arrow:hover { background: var(--primary); color: white; }
+        .carousel-arrow.left { left: 15px; }
+        .carousel-arrow.right { right: 15px; }
 
-.carousel-dots .dot {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: #e6e9f0;
-  border: 2px solid #2c3e50;
-  cursor: pointer;
-  opacity: 0.69;
-  transition: background 0.18s, border 0.18s, opacity 0.17s;
-}
-.carousel-dots .dot.active {
-  background: #e74c3c;
-  border-color: #e74c3c;
-  opacity: 1;
-}
+        .carousel-dots {
+            position: absolute;
+            bottom: 15px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; gap: 8px; z-index: 10;
+        }
 
-/* Responsivo */
-@media (max-width: 1000px) {
-  .carousel-elegant { max-width:96vw; height:54vw; min-height:240px; }
-}
-@media (max-width: 670px) {
-  .carousel-elegant { height:220px; min-height:130px;}
-}
-@media (max-width:400px){
-  .carousel-elegant{ height: 97px;}
-  .carousel-img { border-radius: 10px; }
-}
+        .dot {
+            width: 8px; height: 8px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
 
+        .dot.active {
+            background: var(--secondary);
+            width: 18px; border-radius: 10px;
+        }
 
+        /* --- Download --- */
         .download {
             padding: 80px 0;
             background: linear-gradient(135deg, var(--primary), var(--dark));
@@ -343,41 +257,24 @@
             text-align: center;
         }
         
-        .download-options {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
         .download-card {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 40px 30px;
-            width: 300px;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 400px;
+            margin: 40px auto 0;
             border: 1px solid rgba(255,255,255,0.2);
         }
-        
-        .download-card h3 {
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-        
-        .app-badge {
-            display: block;
-            margin: 20px auto;
-            width: 180px;
-        }
-        
+
+        /* --- Footer --- */
         footer {
             background: var(--dark);
             color: white;
-            padding: 50px 0 20px;
+            padding: 60px 0 20px;
         }
         
-        .footer-content {
+        .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
@@ -386,123 +283,69 @@
         
         .footer-section h3 {
             margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-section h3:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--accent);
-        }
-        
-        
-        .footer-links  {
-            list-style: none;
-            margin-bottom: 12px;
-            color: #ddd;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .footer-links a {
-            list-style: none;
-            margin-bottom: 12px;
-            color: #ddd;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        
-        .footer-links :hover {
+            font-size: 1.2rem;
             color: var(--accent);
-            padding-left: 5px;
         }
         
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a:hover { color: white; padding-left: 5px; }
+
         .copyright {
             text-align: center;
             padding-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.9rem;
-            color: #aaa;
+            font-size: 0.85rem;
+            color: #888;
         }
 
-
-        .logo-img {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    border-radius: 8px; 
-    margin-right: 10px;
-}
-
-.download-options {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin-top: 40px;
-}
-
-
-        
+        /* --- Responsive --- */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            nav ul {
-                gap: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .hero h2 {
-                font-size: 2.2rem;
-            }
+            .header-content { flex-direction: column; gap: 15px; }
+            .hero h2 { font-size: 1.8rem; }
+            .carousel-elegant { aspect-ratio: 4 / 3; width: 95%; }
+            nav ul { font-size: 0.8rem; gap: 8px; }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
     <script>(function(s){s.dataset.zone='10625271',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <img src="pictures/logo.jpg" alt="Logo Domino Club" class="logo-img">
-                    <h1>Domino Club</h1>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#features">Características</a></li>
-                        <li><a href="#screenshots">Capturas</a></li>
-                        <li><a href="#download">Descargar</a></li>
-                        <li><a href="#contact">Contacto</a></li>
-                    </ul>
-                </nav>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="pictures/logo.jpg" alt="Logo" class="logo-img">
+                <h1>Domino Club</h1>
             </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Características</a></li>
+                    <li><a href="#screenshots">Capturas</a></li>
+                    <li><a href="#download">Descargar</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h2>El Mejor Dominó en tu Dispositivo</h2>
-                <p>Juega partidas emocionantes contra tus amigos. Domina las estrategias del dominó con una experiencia única y adictiva.</p>
-                <a href="#download" class="cta-button">Descargar Ahora</a>
-                <a href="https://play.dominoclub.online/" target="_blank" class="cta-button">Jugar en Línea</a>
-            </div>
+            <h2>El Mejor Dominó en tu Dispositivo</h2>
+            <p>Juega partidas emocionantes contra tus amigos. Domina las estrategias del dominó con una experiencia única y adictiva.</p>
+            <a href="#download" class="cta-button">Descargar Ahora</a>
+            <a href="https://play.dominoclub.online/" target="_blank" class="cta-button" style="background: transparent; border: 2px solid white;">Jugar en Línea</a>
         </div>
     </section>
 
-    <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
             <div class="section-title">
@@ -510,221 +353,135 @@
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h3>Opciones Abiertas</h3>
-                        <p>Mesas con requisitos variables: con entradas gratis o por monedas.</p>
-                    </div>
+                    <i class="fas fa-coins feature-icon"></i>
+                    <h3>Opciones Abiertas</h3>
+                    <p>Mesas con requisitos variables: con entradas gratis o por monedas.</p>
                 </div>
-                
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h3>Multijugador</h3>
-                        <p>Juega con amigos en partidas locales o desafía a jugadores de todo el mundo en línea.</p>
-                    </div>
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3>Multijugador</h3>
+                    <p>Juega con amigos en partidas locales o desafía a jugadores de todo el mundo.</p>
                 </div>
-                
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h3>Modos de Juego</h3>
-                        <p>Clásico, Parejas, Todas contra todos y torneos especiales con recompensas.</p>
-                    </div>
+                    <i class="fas fa-trophy feature-icon"></i>
+                    <h3>Modos de Juego</h3>
+                    <p>Clásico, Parejas, Todos contra todos y torneos especiales.</p>
                 </div>
-                
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h3>Estadísticas</h3>
-                        <p>Seguimiento detallado de tu rendimiento, historial de partidas y logros desbloqueables.</p>
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h3>Personalización</h3>
-                        <p>Temas personalizables, diseños de fichas y fondos exclusivos para tu experiencia.</p>
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <div class="feature-content">
-                        <h3>Actualizaciones Constantes</h3>
-                        <p>Nuevas características y mejoras añadidas regularmente basadas en tus comentarios.</p>
-                    </div>
+                    <i class="fas fa-paint-brush feature-icon"></i>
+                    <h3>Personalización</h3>
+                    <p>Temas personalizables, diseños de fichas y fondos exclusivos.</p>
                 </div>
             </div>
         </div>
     </section>
 
-   <!-- Screenshots Section con Carrusel -->
-   <section id="screenshots" class="screenshots">
-    <div class="container">
-      <div class="section-title">
-        <h2>Capturas del Juego</h2>
-      </div>
-      <div class="carousel-elegant">
-        <button class="carousel-arrow left" aria-label="Anterior">&#10094;</button>
-        <div class="carousel-track">
-            <img src="pictures/google.jpg" alt="Cuenta de Google" class="carousel-img active">
-            <img src="pictures/inicio.jpg" alt="Inicio"  class="carousel-img">
-            <img src="pictures/crear_mesa.jpg" alt="Crear Mesa" class="carousel-img">
-            <img src="pictures/crear_mesa1.jpg" alt="Crear Mesa Opciones" class="carousel-img">
-            <img src="pictures/juego.jpg" alt="Juego" class="carousel-img">
-            <img src="pictures/juego_pase.jpg" alt="Pase" class="carousel-img">
-            <img src="pictures/partido_terminado.jpg" alt="Partido Terminado" class="carousel-img">
-            <img src="pictures/estilos.jpg" alt="Estilos" class="carousel-img">
-            <img src="pictures/ayuda.jpg" alt="Ayuda" class="carousel-img">
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-title">
+                <h2>Capturas del Juego</h2>
+            </div>
+            <div class="carousel-elegant" id="game-carousel">
+                <button class="carousel-arrow left"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-track">
+                    <img src="pictures/google.jpg" class="carousel-img active">
+                    <img src="pictures/inicio.jpg" class="carousel-img">
+                    <img src="pictures/crear_mesa.jpg" class="carousel-img">
+                    <img src="pictures/juego.jpg" class="carousel-img">
+                    <img src="pictures/partido_terminado.jpg" class="carousel-img">
+                    <img src="pictures/estilos.jpg" class="carousel-img">
+                </div>
+                <button class="carousel-arrow right"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots"></div>
+            </div>
         </div>
-        <button class="carousel-arrow right" aria-label="Siguiente">&#10095;</button>
-        <div class="carousel-dots"></div>
-      </div>
-    </div>
-  </section>
-  
-  
-    <!-- Download Section -->
+    </section>
+
     <section id="download" class="download">
         <div class="container">
-            <div class="section-title-descarga">
-                <h2>Descarga la App</h2>
+            <div class="section-title" style="color: white;">
+                <h2 style="color: white;">Descarga la App</h2>
                 <p>Disponible para dispositivos Android</p>
             </div>
-            <div class="download-options">
-            
-                <div class="download-card">
-                    <h3>Descarga Directa</h3>
-                    <p>Versión APK para instalación manual</p>
-                    <a href="https://github.com/dominoclubinfo-ar/dominoclub_site/releases/download/v1/DominoClubv1.1.0.apk" class="cta-button">Descargar APK (v1.1.0)</a>
-                    <p><small>Tamaño: 20 MB</small></p>
-                </div>
-                
-            </div>
-            
+            <div class="download-card">
+                <h3>Descarga Directa</h3>
+                <p>Versión APK v1.1.0 (20 MB)</p>
+                <a href="https://github.com/dominoclubinfo-ar/dominoclub_site/releases/download/v1/DominoClubv1.1.0.apk" class="cta-button" style="margin-top: 20px; display: block;">Descargar APK</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-grid">
                 <div class="footer-section">
                     <h3>Domino Club</h3>
-                    <p>La mejor experiencia de dominó para dispositivos móviles. Gratis, sin anuncios molestos y con actualizaciones constantes.</p>
+                    <p>La mejor experiencia de dominó móvil. Gratis, sin anuncios molestos y hecho con pasión.</p>
                 </div>
-                
                 <div class="footer-section">
-                    <h3>Enlaces Rápidos</h3>
+                    <h3>Redes Sociales</h3>
                     <ul class="footer-links">
-                        <li><a href="#features">Características</a></li>
-                        <li><a href="#screenshots">Capturas</a></li>
-                        <li><a href="#download">Descargar</a></li>
-                        <li><a href="#">Política de Privacidad</a></li>
-                        <li><a href="#">Términos de Uso</a></li>
+                        <li><a href="https://chat.whatsapp.com/K4TBNUv7ow4FswUV8d4p6L" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                        <li><a href="https://t.me/+Uo07fIMYLPU5MTlh" target="_blank"><i class="fab fa-telegram"></i> Telegram</a></li>
+                        <li><a href="https://www.facebook.com/share/1JqPkvkd5Y/" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="https://www.instagram.com/dominoclub.app" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
                     </ul>
                 </div>
-                 
                 <div class="footer-section">
-                    <h3>Contactos</h3>
+                    <h3>Soporte</h3>
                     <ul class="footer-links">
-                        <li>
-                            <a href="https://www.facebook.com/share/1JqPkvkd5Y/
-                            " target="_blank" class="footer-links">
-                                <i class="fab fa-facebook"></i>
-                                <span>Facebook: Domino Club</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://chat.whatsapp.com/K4TBNUv7ow4FswUV8d4p6L" target="_blank" class="footer-links">
-                                <i class="fab fa-whatsapp"></i>
-                                <span>Whatsapp: Domino Club</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com/dominoclub.app?igsh=N2U2bXhmcHJjdXkz" target="_blank" class="footer-links">
-                                <i class="fab fa-instagram"></i>
-                                <span>Instagram: @dominoclub.app</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="dominoclub.info@gmail.com" target="_blank" class="footer-links">
-                                <i class="fab fa-github"></i>
-                                <span>Email: dominoclub.info@gmail.com</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="https://t.me/+Uo07fIMYLPU5MTlh" target="_blank" class="footer-links">
-                                <i class="fab fa-telegram"></i>
-                                <span>Telegram: Domino Club</span>
-                            </a>
-                        </li>
-
+                        <li><a href="mailto:admin@dominoclub.online"><i class="fas fa-envelope"></i> dominoclub.info@gmail.com</a></li>
                     </ul>
                 </div>
             </div>
-            
             <div class="copyright">
-                <p>&copy; 2025 Domino Club. Todos los derechos reservados.</p>
+                <p>&copy; 2026 Domino Club. Desarrollado con pasión.</p>
             </div>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-  const imgs = document.querySelectorAll('.carousel-img');
-  const prev = document.querySelector('.carousel-arrow.left');
-  const next = document.querySelector('.carousel-arrow.right');
-  const dotsContainer = document.querySelector('.carousel-dots');
-  let idx = 0;
-  let slideInt;
+            const track = document.querySelector('.carousel-track');
+            const imgs = document.querySelectorAll('.carousel-img');
+            const next = document.querySelector('.carousel-arrow.right');
+            const prev = document.querySelector('.carousel-arrow.left');
+            const dotsContainer = document.querySelector('.carousel-dots');
+            let idx = 0;
 
-  // Crear dots
-  imgs.forEach((_, i) => {
-    const dot = document.createElement('span');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.addEventListener('click', () => { showImg(i); stopSlide(); });
-    dotsContainer.appendChild(dot);
-  });
-  const dots = dotsContainer.querySelectorAll('.dot');
+            // Crear dots
+            imgs.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => showImg(i));
+                dotsContainer.appendChild(dot);
+            });
+            const dots = document.querySelectorAll('.dot');
 
-  function showImg(i) {
-    imgs.forEach((img, j) => {
-      img.classList.toggle('active', j === i);
-      dots[j].classList.toggle('active', j === i);
-    });
-    idx = i;
-  }
+            function showImg(index) {
+                imgs[idx].classList.remove('active');
+                dots[idx].classList.remove('active');
+                idx = (index + imgs.length) % imgs.length;
+                imgs[idx].classList.add('active');
+                dots[idx].classList.add('active');
+            }
 
-  function nextImg() { showImg((idx + 1) % imgs.length);}
-  function prevImg() { showImg((idx - 1 + imgs.length) % imgs.length);}
-  function startSlide() { stopSlide(); slideInt = setInterval(nextImg, 5000); }
-  function stopSlide() { clearInterval(slideInt); }
+            next.addEventListener('click', () => showImg(idx + 1));
+            prev.addEventListener('click', () => showImg(idx - 1));
 
-  next.addEventListener('click', () => { nextImg(); stopSlide(); });
-  prev.addEventListener('click', () => { prevImg(); stopSlide(); });
+            // Soporte Táctil (Swipe)
+            let touchStartX = 0;
+            track.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
+            track.addEventListener('touchend', e => {
+                let touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 50) showImg(idx + 1);
+                if (touchEndX - touchStartX > 50) showImg(idx - 1);
+            });
 
-  showImg(idx);
-  startSlide();
-});
-
-        </script>
-        
+            // Auto-play cada 5s
+            setInterval(() => showImg(idx + 1), 5000);
+        });
+    </script>
 </body>
 </html>
